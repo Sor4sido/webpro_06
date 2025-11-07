@@ -4,6 +4,32 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use("/public", express.static(__dirname + "/public"));
 
+let station = [
+  { id:1 , code:"JE01" , name:"東京駅" } ,
+  { id:2 , code:"JE07" , name:"舞浜駅" } ,
+  { id:3 , code:"JE12" , name:"新習志野駅" } ,
+  { id:4 , code:"JE13" , name:"幕張豊砂駅" } ,
+  { id:5 , code:"JE14" , name:"海浜幕張駅" } ,
+  { id:6 , code:"JE05" , name:"新浦安駅" } ,
+] ;
+
+app.get("/keiyo" , (req , res ) => {
+  res.render('db1' , { data: station } ) ;
+} ) ;
+
+app.get("/keiyo2" , (req , res ) => {
+  res.render('db2' , { data: station } ) ;
+} ) ;
+
+app.get("/keiyo_add" , (req , res ) => {
+  let id = req.query.id ;
+  let code = req.query.code ;
+  let name = req.query.name ;
+  let newdata = { id: id , code: code , name: name } ;
+  station.push( newdata ) ;
+  res.redirect( '/public/keiyo_add.html' ) ;
+} ) ;
+
 app.get("/hello1", (req, res) => {
   const message1 = "Hello world";
   const message2 = "Bon jour";
