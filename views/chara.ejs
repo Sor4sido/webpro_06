@@ -1,0 +1,48 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>レジェンズキャラクター</title>
+  <style>
+    th , td {
+      padding : 7px 12px ;
+      text-align : left ;
+      border-bottom : 1px solid #ddd ;
+    }
+  </style>
+</head>
+<body>
+  <h2><%= title %></h2>
+  <% if (showBackButton) { %>
+    <p><a href="/character">一覧に戻る</a></p>
+  <% } %>
+  
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>カード番号</th>
+      <th>キャラクター名</th>
+      <th>属性</th>
+      <th>タグ</th>
+    </tr>
+      <% for( let row of data ) { %>
+       <tr>
+        <td><%= row.id %></td>
+        <td><%= row.code %></td>
+        <td>
+          <a href="/character/<%= row.id %>"><%= row.name %></a>
+        </td>
+        <td>
+          <a href="/color/<%= row.color %>" class="color-link"><%= row.color %></a>
+        </td>
+        <td>
+          <% for ( let t of row.tag ) { %>
+          <a href="/tag/<%= t %>" class="tag-link"><%= t %></a>
+          <% } %>
+        </td>
+      </tr>
+    <% } %>
+  </table>
+  <a href="/character/create">追加</a>
+</body>
+</html>

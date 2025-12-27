@@ -1,0 +1,30 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+</head>
+<body>
+    <h2>新規キャラクター登録</h2>
+    <form action="/character" method="POST" enctype="multipart/form-data">
+        <label for="code">カード番号:</label><br>
+        <input type="text" name="code" required><br><br>
+
+        <label for="name">キャラクター名:</label><br>
+        <input type="text" name="name" required><br><br>
+        
+        <label for="color">属性:</label><br>
+        <input type="text" name="color"><br><br>
+        
+        <label for="tag">タグ(カンマ区切り):</label><br>
+        <input type="text" name="tag" placeholder="サイヤ人,孫一族" required><br><br>
+
+        <label>画像</label><br>
+        <input type="file" name="image"><br><br>
+
+        <input type="submit" value="登録">
+    </form>
+    <br>
+    <a href="/character">一覧に戻る</a>
+</body>
+</html>

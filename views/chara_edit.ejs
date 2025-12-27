@@ -1,0 +1,30 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= data.name %></title>
+</head>
+<body>
+  <h2><%= data.name %>の編集</h2>
+  <form action="/character/update/<%= data.id %>" method="POST" enctype="multipart/form-data">
+    <table>
+      <tr><th>項目</th><th>データ</th></tr>
+      <tr><td>ID</td><td><input type="text" name="id" value="<%= data.id %>"></td></tr>
+      <tr><td>カード番号</td><td><input type="text" name="code" value="<%= data.code %>"></td></tr>
+      <tr><td>キャラクター名</td><td><input type="text" name="name" value="<%= data.name %>"></td></tr>
+      <tr><td>属性</td><td><input type="text" name="color" value="<%= data.color %>"></td></tr>
+      <tr><td>タグ</td><td><input type="text" name="tag" value="<%= data.tag %>"></td></tr>
+      <tr>
+        <td>画像</td>
+        <td>
+          <img src="/public/img/<%= data.id %>.jpeg" width="100"><br>
+          <input type="file" name="image">
+        </td>
+      </tr>
+    </table>
+
+    <input type="submit" value="登録">
+  </form>
+  <a href="/character/">一覧に戻る</a>
+</body>
+</html>

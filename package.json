@@ -4,11 +4,12 @@
   "description": "Node.js example server starter project",
   "main": "src/index.js",
   "scripts": {
-    "start": "node app5.js"
+    "start": "node DBL.js"
   },
   "dependencies": {
     "ejs": "^3.1.10",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "multer": "^2.0.2"
   },
   "keywords": []
 }
