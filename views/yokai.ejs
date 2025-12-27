@@ -1,0 +1,28 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>妖怪ウォッチ</title>
+  <style>
+    th , td {
+      padding : 7px 12px ;
+      text-align : left ;
+      border-bottom : 1px solid #ddd ;
+    }
+  </style>
+</head>
+<body>
+  <h2>妖怪一覧</h2>
+  <table>
+    <tr><th>ID</th><th>ランク</th><th>名前</th></tr>
+      <% let number = 0 %>
+      <% for( let row of data ) { %>
+        <tr><td><%= row.id %></td>
+        <td><%= row.rank %></td>
+        <td><a href="/yokai/<%= number %>"><%= row.name %></a></td></tr>
+        <% number += 1 %>
+      <% } %>
+  </table>
+  <a href="/yokai/create">追加</a>
+</body>
+</html>

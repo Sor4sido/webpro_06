@@ -1,0 +1,27 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= data.name %></title>
+  <style>
+    th , td {
+      padding : 7px 12px ;
+      text-align : left ;
+      border-bottom : 1px solid #ddd ;
+    }
+  </style>
+</head>
+<body>
+  <h2><%= data.name %>の詳細</h2>
+  <table>
+    <tr><th>項目</th><th>データ</th></tr>
+    <tr><td>ランキング</td><td><%= data.ranking %></td></tr>
+    <tr><td>曲名</td><td><%= data.name %></td></tr>
+    <tr><td>歌手</td><td><%= data.artist %></td></tr>
+    <tr><td>選曲番号</td><td><%= data.code %></td></tr>
+  </table>
+  <a href="/song/edit/<%= id %>">編集</a>
+  <a href="/song/delete/<%= id %>">削除</a>
+  <a href="/song">一覧に戻る</a>
+</body>
+</html>

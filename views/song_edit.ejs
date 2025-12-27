@@ -1,0 +1,21 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= data.name %></title>
+</head>
+<body>
+  <h2><%= data.name %>の編集</h2>
+  <form action="/song/update/<%= data.id - 1 %>" method="POST">
+    <table>
+      <tr><th>項目</th><th>データ</th></tr>
+      <tr><td>ランキング</td><td><input type="text" name="ranking" value="<%= data.ranking %>"></td></tr>
+      <tr><td>曲名</td><td><input type="text" name="name" value="<%= data.name %>"></td></tr>
+      <tr><td>歌手</td><td><input type="text" name="artist" value="<%= data.artist %>"></td></tr>
+      <tr><td>選曲番号</td><td><input type="text" name="code" value="<%= data.code %>"></td></tr>
+    </table>
+    <input type="submit" value="登録">
+  </form>
+  <a href="/song">一覧に戻る</a>
+</body>
+</html>

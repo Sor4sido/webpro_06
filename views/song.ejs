@@ -1,0 +1,28 @@
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>カラオケ</title>
+  <style>
+    th , td {
+      padding : 7px 12px ;
+      text-align : left ;
+      border-bottom : 1px solid #ddd ;
+    }
+  </style>
+</head>
+<body>
+  <h2>曲一覧</h2>
+  <table>
+    <tr><th>ID</th><th>ランキング</th><th>曲名</th></tr>
+      <% let number = 0 %>
+      <% for( let row of data ) { %>
+        <tr><td><%= row.id %></td>
+        <td><%= row.ranking %></td>
+        <td><a href="/song/<%= number %>"><%= row.name %></a></td></tr>
+        <% number += 1 %>
+      <% } %>
+  </table>
+  <a href="/song/create">追加</a>
+</body>
+</html>

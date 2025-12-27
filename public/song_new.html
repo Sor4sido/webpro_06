@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>登録</title>
+</head>
+<body>
+    <form action="/song" method="POST">
+        <label for="ranking">ランキング:</label>
+        <input type="text" name="ranking" required><br>
+
+        <label for="name">曲名:</label>
+        <input type="text" name="name" required><br>
+
+        <label for="artist">歌手:</label>
+        <input type="text" name="artist" required><br>
+
+        <label for="code">選曲番号:</label>
+        <input type="text" name="code" required><br>
+
+        <input type="submit" value="登録">
+    </form>
+    <a href="/song">一覧に戻る</a>
+</body>
+</html>

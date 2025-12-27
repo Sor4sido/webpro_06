@@ -5,6 +5,7 @@ const app = express();
 
 const multer = require('multer');
 const fs = require('fs');
+const { type } = require("os");
 
 const uplood = multer ( { dest: 'public/img/' } );
 
@@ -12,6 +13,7 @@ app.set('view engine', 'ejs');
 app.use("/public", express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
+// ---レジェンズ---
 let character = [
     { id:1 , code:"DBL07-11S" , name:"破壊神 ビルス" , color:"GRN" , tag: ["破壊神" , "神の気" , "双子" , "強大な敵"] } ,
     { id:2 , code:"DBL10-06S" , name:"超サイヤ人2 孫悟飯:少年期" , color:"RED" , tag: ["混血サイヤ人" , "孫一族" , "超サイヤ人2"] } ,
@@ -250,5 +252,148 @@ app.get("/tag/:name", (req, res) => {
   showBackButton: true
   });
 });
+
+
+
+// ---妖怪ウォッチ---
+let yokai = [
+  { id:1, rank:"S", name:"ブシニャン", type:"イサマシ族" },
+  { id:2, rank:"S", name:"しゅらコマ", type:"フシギ族" },
+  { id:3, rank:"S", name:"イケメン犬", type:"ブキミー族" },
+  { id:4, rank:"S", name:"花さか爺", type:"ポカポカ族" },
+  { id:5, rank:"S", name:"山吹鬼", type:"ゴーケツ族" },
+];
+
+app.get("/yokai", (req, res) => {
+  res.render('yokai', {data: yokai} );
+});
+
+app.get("/yokai/create", (req, res) => {
+  res.redirect('/public/yokai_new.html');
+});
+
+app.get("/yokai/:number", (req, res) => {
+  const num = req.params.number;
+  const detail = yokai[ num ];
+  if (detail) {
+    res.render("yokai_detail", { id: num, data: detail });
+  } else {
+    res.redirect("/yokai");
+  }
+});
+
+app.get("/yokai/delete/:number", (req, res) => {
+  const num = req.params.number;
+  if (yokai[num]) yokai.splice( num, 1 );
+  console.log ("削除しました");
+  res.redirect('/yokai' );
+});
+
+app.post("/yokai", (req, res) => {
+  const id = yokai.length + 1;
+  const rank = req.body.rank;
+  const name = req.body.name;
+  const type = req.body.type;
+  yokai.push( {
+    id: id,
+    rank: rank,
+    name: name,
+    type: type
+  } );
+  console.log( "登録完了 ID:" + id );
+  res.render('yokai', {data: yokai} );
+});
+
+app.get("/yokai/edit/:number", (req, res) => {
+  const num = req.params.number;
+  const detail = yokai[ num ];
+  if (detail) {
+    res.render("yokai_edit", { id: num, data: detail });
+  } else {
+    res.redirect("/yokai");
+  }
+});
+
+app.post("/yokai/update/:number", (req, res) => {
+  yokai[req.params.number].rank = req.body.rank;
+  yokai[req.params.number].name = req.body.name;
+  yokai[req.params.number].type = req.body.type;
+  console.log( yokai[req.params.number] );
+  res.redirect('/yokai' );
+});
+
+
+
+// ---カラオケ---
+let song = [
+  { id:1, ranking:"1", name:"ライラック", artist:"Mrs. GREEN APPLE", code:"1447-11" },
+  { id:2, ranking:"2", name:"怪獣の花唄", artist:"Vaundy", code:"5277-09" },
+  { id:3, ranking:"3", name:"かわいいだけじゃだめですか？", artist:"CUTIE STREET", code:"5538-64" },
+  { id:4, ranking:"4", name:"残酷な天使のテーゼ", artist:"高橋洋子", code:"1896-04" },
+  { id:5, ranking:"5", name:"サウダージ", artist:"ポルノグラフティ", code:"6167-17" },
+];
+
+app.get("/song", (req, res) => {
+  res.render('song', {data: song} );
+});
+
+app.get("/song/create", (req, res) => {
+  res.redirect('/public/song_new.html');
+});
+
+app.get("/song/:number", (req, res) => {
+  const num = req.params.number;
+  const detail = song[ num ];
+  if (detail) {
+    res.render("song_detail", { id: num, data: detail });
+  } else {
+    res.redirect("/song");
+  }
+});
+
+app.get("/song/delete/:number", (req, res) => {
+  const num = req.params.number;
+  if (song[num]) song.splice( num, 1 );
+  console.log ("削除しました");
+  res.redirect('/song' );
+});
+
+app.post("/song", (req, res) => {
+  const id = song.length + 1;
+  const ranking = req.body.ranking;
+  const name = req.body.name;
+  const artist = req.body.artist;
+  const code = req.body.code;
+  song.push( {
+    id: id,
+    ranking: ranking,
+    name: name,
+    artist: artist,
+    code: code
+  } );
+  console.log( "登録完了 ID:" + id );
+  res.render('song', {data: song} );
+});
+
+app.get("/song/edit/:number", (req, res) => {
+  const num = req.params.number;
+  const detail = song[ num ];
+  if (detail) {
+    res.render("song_edit", { id: num, data: detail });
+  } else {
+    res.redirect("/song");
+  }
+});
+
+app.post("/song/update/:number", (req, res) => {
+  song[req.params.number].ranking = req.body.ranking;
+  song[req.params.number].name = req.body.name;
+  song[req.params.number].artist = req.body.artist;
+  song[req.params.number].code = req.body.code;
+  console.log( song[req.params.number] );
+  res.redirect('/song' );
+});
+
+
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
